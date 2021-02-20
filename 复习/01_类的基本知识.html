@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 创建一个Person类
+        class Person {
+                constructor(name,age){
+                    this.name=name;
+                    this.age=age;
+                }
+
+        }
+        // 子类继承父类
+        class Student extends Person {
+                constructor(name,age,grade){
+                        super(name,age);
+                        this.grade=grade;
+                }
+        }
+        //类中可以直接写赋值语句（a=1）
+        const s1=new Student('罗建辉',18,'大四');
+        const p1=new Person('罗建辉',18);
+        const p2=new Person('杨柳',18);
+        console.log(p2);
+        console.log(p1)
+        console.log(s1)
+       /* 
+        1、类的构造器不是必须写的，要添加指定属性才写
+        2、如果A类继承了B类，且A类中写了构造器，那么A类构造器的super是必须调用的
+        3、类中所定义的方法，都是放在了类的原型上面，供实例使用
+       */
+    </script>
+</body>
+</html>

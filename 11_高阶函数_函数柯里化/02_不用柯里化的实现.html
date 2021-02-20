@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>不用柯里化实现</title>
+  </head>
+  <body>
+    <div id="test"></div>
+    <script src="../js/react.development.js"></script>
+    <script src="../js/react-dom.development.js"></script>
+    <script src="../js/babel.min.js"></script>
+    <script src="../js/prop-types.js"></script>
+    <script type="text/babel">
+      class Login extends React.Component {
+        //   初始化状态
+        state = {
+          userName: "",
+          password: "",
+        };
+        // 函数的柯里化
+        saveFormData = (dataType, event) => {
+          this.setState({
+            [dataType]: event.target.value,
+          });
+        };
+
+        handleSubmit = (event) => {
+          event.preventDefault();
+          const { userName, password } = this.state;
+          alert(`名字：${userName}，密码：${password}`);
+        };
+        render() {
+          return (
+            <form action="http://www.baidu.com" onSubmit={this.handleSubmit}>
+              用户名：
+              <input
+                onChange={(event) => {
+                  this.saveFormData("userName", event);
+                }}
+                type="text"
+                name="userName"
+              />
+              密码：
+              <input
+                onChange={(event) => {
+                  this.saveFormData("password", event);
+                }}
+                type="password"
+                name="password"
+              />
+              <button>登录</button>
+            </form>
+          );
+        }
+      }
+      ReactDOM.render(<Login />, document.getElementById("test"));
+    </script>
+  </body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        let arr1=[1,2,3,4,5];
+        let arr2=[2,3,4,6,7,0];
+        console.log(...arr1)
+        let arr3=[...arr1,...arr2];
+        function sum(...numbers){
+           return numbers.reduce((preValues,currentValue)=>{
+               return preValues+currentValue
+           })
+
+            
+        }
+        let total=sum(1,2,3,4,5,5);
+        console.log(total)
+        let person={name:'tom',age:'18'};//展开运算符不能展开一个对象
+        let person1={...person};
+        let person2={...person,name:'jack'}//合并运算符
+    </script>
+</body>
+</html>

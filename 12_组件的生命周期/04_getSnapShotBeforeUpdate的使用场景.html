@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    .list {
+      width: 300px;
+      height: 150px;
+      overflow: auto;
+    }
+    .news {
+      height: 30px;
+    }
+  </style>
+  <body>
+    <div id="test"></div>
+    <script src="../js/newPackage/react.development.js"></script>
+    <script src="../js/newPackage/react-dom.development.js"></script>
+    <script src="../js/newPackage/babel.min.js"></script>
+    <script src="../js/newPackage/prop-types.js"></script>
+    <script type="text/babel">
+      class List extends React.Component {
+        state = {
+          newsArr: [],
+        };
+        render() {
+          return (
+            <div className="list" ref="list">
+              {this.state.newsArr.map((n)=>{
+                  return <div className="news">{n}</div>
+              })}
+            </div>
+          );
+        }
+        componentDidMount() {
+          setInterval(() => {
+            const { newsArr } = this.state;
+            let news = "新闻" + (newsArr.length + 1);
+            this.setState({
+              newsArr: [news, ...newsArr],
+            });
+          }, 1000);
+        }
+        getSnapshotBeforeUpdate(){
+            return this.refs.list.scrollHeight;
+        }
+        componentDidUpdate(preProps,preState,snapShotValue){
+            this.refs.list.scrollTop+=this.refs.list.scrollHeight-snapShotValue
+        }
+      }
+      ReactDOM.render(<List />, document.getElementById("test"));
+    </script>
+  </body>
+</html>

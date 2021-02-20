@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="test"></div>
+    <div id="test1"></div>
+    <script src="../js/react.development.js"></script>
+    <script src="../js/react-dom.development.js"></script>
+    <script src="../js/babel.min.js"></script>
+    <!-- 用于对组件的标签属性进行限制 -->
+    <script src="../js/prop-types.js"></script>
+    <script type="text/babel">
+      class Person extends React.Component {
+        /* 构造器仅用于以下两种情况：
+        1、通过this.state赋值对象来初始化内部state
+        2、为事件处理函数绑定实例 */
+        // 构造器是否接收props，是否传递给super，取决于是否希望在构造器中通过this访问props
+        constructor(props) {
+          super(props);
+        }
+        render() {
+          const { name, sex, age } = this.props;
+          // props是只读的
+          return (
+            <ul>
+              <li>姓名：{name}</li>
+              <li>性别：{sex}</li>
+              <li>年龄：{age}</li>
+            </ul>
+          );
+        }
+        // 对标签属性类型，必要性进行限制
+        //  static的作用是为了在类自身加这个属性
+        static propTypes = {
+          name: PropTypes.string.isRequired, //必须的
+          sex: PropTypes.string,
+          age: PropTypes.number,
+          speak: PropTypes.func,
+        };
+        // 指定默认标签属性值
+        static defaultProps = {
+          //默认值
+          sex: "女",
+          age: 18,
+        };
+      }
+
+      let person = { name: "tom", sex: "女", age: 18 };
+      ReactDOM.render(<Person {...person} />, document.getElementById("test"));
+      function speak() {}
+    </script>
+  </body>
+</html>

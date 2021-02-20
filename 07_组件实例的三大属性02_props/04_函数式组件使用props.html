@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="test"></div>
+    <div id="test1"></div>
+    <script src="../js/react.development.js"></script>
+    <script src="../js/react-dom.development.js"></script>
+    <script src="../js/babel.min.js"></script>
+    <!-- 用于对组件的标签属性进行限制 -->
+    <script src="../js/prop-types.js"></script>
+    <script type="text/babel">
+    // 函数式组件可以用props，但是不能使用state和refs，到后面使用了hooks才可以
+      function Person(props){
+          const {name,age,sex}=props;
+          return (
+              <ul>
+                  <li>姓名：{name}</li>
+                  <li>年龄：{age}</li>
+                  <li>性别：{sex}</li>
+              </ul>
+          )
+      }
+      Person.propTypes={
+            name:PropTypes.string
+      }
+      Person.defaultProps={
+          name:'Tom'
+      }
+      let person = { sex: "女", age: 18 };
+      ReactDOM.render(<Person {...person} />, document.getElementById("test"));
+      function speak() {}
+    </script>
+  </body>
+</html>
